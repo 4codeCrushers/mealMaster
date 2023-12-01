@@ -1,8 +1,27 @@
-.day {display:inline-block;}
+.day {
+    display:inline-block;
+    }
+
+.day:hover {
+    background-color: #C1E1C1;
+}
+
+.add-icon {
+    opacity: 50%;
+    height: 40px;
+    width: auto;
+    display: flex;
+}
+
+.day:hover .add-icon {
+    display: flex !important;
+}
 
 .calendar {
     padding-top: 2.5%;
     padding-bottom: 2.5%;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .footer-menu {
