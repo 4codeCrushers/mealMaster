@@ -5,7 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
         dayElement.addEventListener('click', function () {
             var dayOfMonth = dayElement.querySelector('.card-title').innerText;
             localStorage.setItem('selectedDay', dayOfMonth); // selected day is stored in dayOfMonth var
-            //console.log(dayOfMonth);
+            console.log(dayOfMonth);
         });
     });
 });
+
+// Display month and year
+var date = dayjs().format("MMMM YYYY");
+$("#today").text(date);

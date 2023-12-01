@@ -6,6 +6,12 @@
     background-color: #C1E1C1;
 }
 
+#today {
+    display: flex;
+    justify-content: center;
+    padding-top: 2%;
+}
+
 .add-icon {
     opacity: 50%;
     height: 40px;
@@ -18,7 +24,7 @@
 }
 
 .calendar {
-    padding-top: 2.5%;
+    padding-top: 1%;
     padding-bottom: 2.5%;
     padding-left: 10%;
     padding-right: 10%;
