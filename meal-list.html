@@ -8,7 +8,24 @@
   <title>mealMaster</title>
 </head>
 <body>
-  <h1>Create Your Meal List</h1>
+  <div class="container">
+    <h1>Create Your Meal List</h1>
+    <div class="row">
+      <div class="col-12">
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search">
+          <button class="btn btn-outline-success" type="submit" id="search-btn">Search</button>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div id="meal-list">
+          <p>Meal 1</p>
+          <p>Meal 2</p>
+        </div>
+      </div>
+    </div>
   <script src="./assets/js/mealList.js"></script>
 </body>
 </html>
