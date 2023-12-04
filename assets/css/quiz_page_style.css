@@ -1,0 +1,26 @@
+.quizHeading {
+    text-align: center;
+    padding: 20px;
+}
+
+.form-floating {
+    margin: 8px;
+}
+
+h4 {
+    text-align: center;
+}
+
+.questionOne, .questionTwo, .questionThree {
+    margin-top: 40px;
+}
+
+.buttonOne, .buttonTwo, .buttonThree {
+    text-align: center;
+}
+
+.jumbotron {
+    background-color: lightblue;
+    text-align: center;
+    padding: 25px;
+}
