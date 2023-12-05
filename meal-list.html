@@ -1,30 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>mealMaster</title>
-  <link rel="stylesheet" href="./assets/css/meal-list.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
-<body>
-  <div class="container-fluid">
-    <h1 id="main-header">Create Your Meal List</h1>
-    <div class="row">
-      <div class="col-6"></div>
+  <head>
+    <title>mealMaster</title>
+    <link rel="stylesheet" href="./assets/css/meal-list.css">````
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous">
+  </head>
+  <body>
+    <header class="container-fluid text-center p-2">
+      <h1 id="main-header">Create Your Meal List</h1>
+    </header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <h2 id="meal-header">Your Nutrition Goal:</h2>
+          <div class="goal-list">
+            <ul id="goal-list"></ul>
+          </div>
+        </div>
+        <div class="col-6">
+          <h2 id="nutrition-header">Nutrition Leftover:</h2>
+          <div class="leftover-list">
+            <ul id="leftover-list"></ul>
+          </div>
+        </div>
+      </div>
+      <p id="sub-header">Search for your favorite meals and add them to your list!</p>
+      <div class="row">
         <form class="d-flex search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+          <input class="form-control me-2" type="search" placeholder="Search"
+            aria-label="Search" id="search-input">
           <button class="btn btn-outline-success" type="submit" id="search-btn">Search</button>
         </form>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div style="display: flex; justify-content: center; align-items: center;" id="meal-list"></div>
-        </div>
+      <div class="row">
+        <div
+          style="display: flex; justify-content: center; align-items: center;"
+          id="meal-list"></div>
       </div>
     </div>
-  <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="./assets/js/mealList.js"></script>
-</body>
+    <!-- jQuery -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./assets/js/mealList.js"></script>
+  </body>
 </html>

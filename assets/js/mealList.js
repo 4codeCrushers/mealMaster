@@ -2,14 +2,38 @@ const apiKey = "972063cc90ff4bc1a3231263caa289bd";
 const searchInput = $("input");
 const searchBtn = $("#search-btn");
 const mealList = $("#meal-list");
+const goalList = $("#goal-list");
+const leftoverList = $("#leftover-list");
 
-const goal = {
-  goal: { calories: 2000, carbs: 200, fat: 50, protein: 100 },
-  leftover: { calories: 2000, carbs: 10, fat: 30, protein: 60 }
-};
+
+var nutritionInfo = function () {
+  const nutrition = {
+    goal: { calories: 2000, carbs: 200, fat: 50, protein: 100 },
+    leftover: { calories: 2000, carbs: 10, fat: 30, protein: 60 }
+  };
+
+  localStorage.setItem("goal", JSON.stringify(nutrition));
+  return nutrition;
+}
+
+// parse nutrition from local storage or create empty object
+nutritionInfo();
+
 // parse queries from local storage or create empty array
 const queries = JSON.parse(localStorage.getItem("queries")) || {};
 localStorage.setItem("queries", JSON.stringify(queries));
+
+const nutrition = JSON.parse(localStorage.getItem("goal")) || {};
+
+$(`<li>${nutrition.goal.calories} calories</li>`).appendTo(goalList);
+$(`<li>${nutrition.goal.carbs} carbs</li>`).appendTo(goalList);
+$(`<li>${nutrition.goal.fat} fat</li>`).appendTo(goalList);
+$(`<li>${nutrition.goal.protein} protein</li>`).appendTo(goalList);
+
+$(`<li>${nutrition.leftover.calories} calories</li>`).appendTo(leftoverList);
+$(`<li>${nutrition.leftover.carbs} carbs</li>`).appendTo(leftoverList);
+$(`<li>${nutrition.leftover.fat} fat</li>`).appendTo(leftoverList);
+$(`<li>${nutrition.leftover.protein} protein</li>`).appendTo(leftoverList);
 
 // Event listener for search button
 $("form").on("submit", function (event) {
@@ -64,7 +88,7 @@ function saveQuery(query, data) {
 
 // function to check if there are leftover calories
 function hasLeftoverCalories(existingQueries, newQueryCalories) {
-  let leftover = goal.goal.calories;
+  let leftover = nutrition.goal.calories;
 
   // Loop through all existing query items and subtract calories from leftover
   for (var [key, value] of Object.entries(existingQueries)) {
@@ -72,7 +96,7 @@ function hasLeftoverCalories(existingQueries, newQueryCalories) {
   }
 
   if (leftover >= newQueryCalories || Object.keys(existingQueries).length === 0) {
-    goal.leftover.calories = leftover;
+    nutrition.leftover.calories = leftover;
     leftover -= newQueryCalories;
 
     return true;
