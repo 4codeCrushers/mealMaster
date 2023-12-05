@@ -92,14 +92,17 @@ function showCards() {
         <p class="card-text">Protein: ${value.protein}</p>
         <a href="#" class="btn btn-primary">Check Recipe!</a>
       </div>
-    </div>`;
+    </div>
+  `;
 
     cardRow.append(queryCard);
     cardCount++;
 
     if (cardCount === 4) {
       mealList.append(cardRow);
+      // Create a new row
       cardRow = $("<div class='row'></div>");
+      // Reset the card count
       cardCount = 0;
     }
   }
@@ -109,5 +112,6 @@ function showCards() {
     mealList.append(cardRow);
   }
 }
+
 
 showCards()
