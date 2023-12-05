@@ -7,9 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem('selectedDay', dayOfMonth); // selected day is stored in dayOfMonth var
         });
     });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
     // Displays todays date
     var date = dayjs().format("MMMM YYYY");
     $("#today").text(date);
@@ -32,4 +29,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         calendarContainer.append(newCard);
     }
-});
+});   

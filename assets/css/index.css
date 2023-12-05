@@ -1,11 +1,12 @@
 /* calendar styles */
-.day { display:inline-block; }
-.day:hover { background-color: #C1E1C1; }
 #today {
     display: flex;
     justify-content: center;
     padding-top: 2%;
 }
+.calendar { padding: 1% 10% 2.5% 10%; }
+.day { display: inline-block }
+.day:hover { background-color: #C1E1C1; }
 .add-icon {
     opacity: 50%;
     height: 30px;
@@ -13,12 +14,6 @@
     display: flex;
 }
 .day:hover .add-icon { display: flex !important; }
-.calendar {
-    padding-top: 1%;
-    padding-bottom: 2.5%;
-    padding-left: 10%;
-    padding-right: 10%;
-}
 
 /* footer styles */
 .footer-menu {
