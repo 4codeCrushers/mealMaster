@@ -1,4 +1,4 @@
-const apiKey = "600998a5ce3a47579fa28a23d0ddb36d";
+const apiKey = "972063cc90ff4bc1a3231263caa289bd";
 const searchInput = $("input");
 const searchBtn = $("#search-btn");
 const mealList = $("#meal-list");
@@ -78,10 +78,12 @@ function showCards() {
   mealList.empty();
 
   let queries = JSON.parse(localStorage.getItem("queries")) || {};
-  for (var [key, value] of Object.entries(queries)) {
+  let cardRow = $("<div class='row'></div>");
+  let cardCount = 0;
 
+  for (var [key, value] of Object.entries(queries)) {
     const queryCard = `
-    <div class="card" style="width: 18rem;">
+    <div class="card col-md-3" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">${key}</h5>
         <p class="card-text">Calories: ${value.calories}</p>
@@ -90,9 +92,22 @@ function showCards() {
         <p class="card-text">Protein: ${value.protein}</p>
         <a href="#" class="btn btn-primary">Check Recipe!</a>
       </div>
-    </div>`
-    mealList.append(queryCard);
-  };
+    </div>`;
+
+    cardRow.append(queryCard);
+    cardCount++;
+
+    if (cardCount === 4) {
+      mealList.append(cardRow);
+      cardRow = $("<div class='row'></div>");
+      cardCount = 0;
+    }
+  }
+
+  // Append the remaining cards if the count is not a multiple of 4
+  if (cardCount > 0) {
+    mealList.append(cardRow);
+  }
 }
 
 showCards()
