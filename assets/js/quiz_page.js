@@ -30,8 +30,6 @@ $('.buttonOne button').on('click', function () {
     localStorage.setItem('carbohydrates', carbohydrates);
     localStorage.setItem('fat', fat);
 
-    console.log(localStorage.fat);
-
     showQuestionAndButton('.questionTwo, .buttonTwo');
 
 });
@@ -41,7 +39,7 @@ $('.buttonOne button').on('click', function () {
 
 $('.buttonTwo button').on('click', function () {
 
-    var numberOfMeals = $('#floatingInputGrid1').val();
+    var numberOfMeals = $('#floatingInputGrid5').val();
     localStorage.setItem('numberOfMeals', numberOfMeals);
 
     showQuestionAndButton('.questionThree, .buttonThree');
@@ -52,7 +50,7 @@ $('.buttonTwo button').on('click', function () {
 
 $('.buttonThree button').on('click', function () {
 
-    var foodAllergies = $('#floatingInputGrid1').val();
+    var foodAllergies = $('#floatingInputGrid6').val();
     localStorage.setItem('foodAllergies', foodAllergies);
         
     window.location.href = '#';
