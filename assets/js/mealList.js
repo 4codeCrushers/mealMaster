@@ -33,19 +33,24 @@ $("form").on("submit", function (event) {
     );
 });
 
+// function to save queries to local storage
 function saveQuery(query, data) {
+  // declare queries variable and parse queries from local storage or create empty object
   let queries = JSON.parse(localStorage.getItem("queries")) || {};
 
+  // check if query already exists in local storage
   if (queries.hasOwnProperty(query)) {
-    alert(`${query} has already been added to the meal`);
+    alert(`${query} has already been added to the meal list!`);
     return false;
   }
 
+  // check if there are leftover calories
   if (!hasLeftoverCalories(queries, data.calories.value)) {
     alert(`You don't have enough calories for ${query}`);
     return false;
   }
 
+  // add query to queries object
   queries[query] = {
     calories: data.calories.value,
     carbs: data.carbs.value,
@@ -53,9 +58,11 @@ function saveQuery(query, data) {
     protein: data.protein.value
   };
 
+  // save queries to local storage
   localStorage.setItem("queries", JSON.stringify(queries));
 }
 
+// function to check if there are leftover calories
 function hasLeftoverCalories(existingQueries, newQueryCalories) {
   let leftover = goal.goal.calories;
 
@@ -71,9 +78,11 @@ function hasLeftoverCalories(existingQueries, newQueryCalories) {
     return true;
   }
 
+  // If there are no leftover calories, return false
   return false;
 }
 
+// function to show cards
 function showCards() {
   mealList.empty();
 
@@ -95,6 +104,7 @@ function showCards() {
     </div>
   `;
 
+    // Append the card to the row
     cardRow.append(queryCard);
     cardCount++;
 
@@ -112,6 +122,5 @@ function showCards() {
     mealList.append(cardRow);
   }
 }
-
 
 showCards()
