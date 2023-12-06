@@ -27,8 +27,37 @@ $('.nutritionButton button').on('click', function () {
         fat: $('#fatInput').val(),
     }
 
-    localStorage.setItem('quizGoal', JSON.stringify(quizGoal));
+    var feedbackNutrition = $('.nutritionQuestion .invalid-feedback');
 
+    if (quizGoal.calories < 1200 || quizGoal.calories > 5000) {
+        feedbackNutrition.eq(0).show();
+        return;
+    } else {
+        feedbackNutrition.eq(0).hide();
+    }
+
+    if (quizGoal.protein < 50 || quizGoal.protein > 500) {
+        feedbackNutrition.eq(1).show();
+        return;
+    } else {
+        feedbackNutrition.eq(1).hide();
+    }
+
+    if (quizGoal.carbohydrates < 50 || quizGoal.carbohydrates > 500) {
+        feedbackNutrition.eq(2).show();
+        return;
+    } else {
+        feedbackNutrition.eq(2).hide();
+    }
+
+    if (quizGoal.fat < 50 || quizGoal.fat > 500) {
+        feedbackNutrition.eq(3).show();
+        return;
+    } else {
+        feedbackNutrition.eq(3).hide();
+    }
+
+    localStorage.setItem('quizGoal', JSON.stringify(quizGoal));
     showQuestionAndButton('.mealQuestion, .mealButton');
 
 });
@@ -38,11 +67,17 @@ $('.nutritionButton button').on('click', function () {
 
 $('.mealButton button').on('click', function () {
 
-    var numberOfMeals = $('#mealsInput').val();
-    localStorage.setItem('numberOfMeals', numberOfMeals);
+    var numberOfMeals = parseInt($('#mealsInput').val(), 10);
+    var feedbackMeals = $('.mealQuestion .invalid-feedback');
 
-    showQuestionAndButton('.allergiesQuestion, .allergiesButton');
-
+    if (numberOfMeals < 1 || numberOfMeals > 10) {
+        feedbackMeals.show();
+        return;
+    } else {
+        feedbackMeals.hide();
+        localStorage.setItem('numberOfMeals', numberOfMeals);
+        showQuestionAndButton('.allergiesQuestion, .allergiesButton');
+    }
 });
 
 // Question Three
@@ -50,8 +85,15 @@ $('.mealButton button').on('click', function () {
 $('.allergiesButton button').on('click', function () {
 
     var foodAllergies = $('#allergiesInput').val();
-    localStorage.setItem('foodAllergies', foodAllergies);
-        
-    window.location.href = '#';
+    var feedbackAllergies = $('.allergiesQuestion .invalid-feedback');
+
+    if (foodAllergies === '') {
+        feedbackAllergies.show();
+        return;
+    } else {
+        feedbackAllergies.hide();
+        localStorage.setItem('foodAllergies', foodAllergies);
+        window.location.href = 'search.html';
+    }
     
 });
