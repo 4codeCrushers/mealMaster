@@ -4,7 +4,10 @@ const searchBtn = $("#search-btn");
 const mealList = $("#meal-list");
 const goalList = $("#goal-list");
 const leftoverList = $("#leftover-list");
+const nutrition = nutritionInfo()
 
+// Load page content
+loadContent()
 
 // Event listener for search button
 $("form").on("submit", function (event) {
@@ -22,15 +25,25 @@ $("form").on("submit", function (event) {
     .then(data => {
 
       saveQuery(query, data);
-      showCards();
-      // Update the leftovers section
+      updateCards();
       updateLeftoversSection();
     }
     );
 });
 
+// function to load page content
+function loadContent() {
+  // Update the goal section
+  localStorage.setItem("goal", JSON.stringify(nutrition));
+  // Update the goal section, the leftovers section, and the cards
+  updateGoalSection(nutrition)
+  updateLeftoversSection(nutrition)
+  updateCards()
+}
+
 // function to save nutrition info to local storage
-var nutritionInfo = function () {
+function nutritionInfo() {
+  // Parse nutrition info from local storage or create empty object
   let nutrition = JSON.parse(localStorage.getItem("goal"));
 
   if (!nutrition) {
@@ -39,16 +52,16 @@ var nutritionInfo = function () {
       leftover: { calories: 2000, carbs: 10, fat: 30, protein: 60 }
     };
 
+    // Save nutrition info to local storage
     localStorage.setItem("goal", JSON.stringify(nutrition));
   }
 
   return nutrition;
 }
 
-// parse nutrition from local storage or create empty object
-const nutrition = nutritionInfo();
-
+// Function to update the goal section
 function updateGoalSection() {
+  // Clear the existing goal list
   goalList.empty();
 
   $(`<li>${nutrition.goal.calories} calories</li>`).appendTo(goalList);
@@ -56,7 +69,6 @@ function updateGoalSection() {
   $(`<li>${nutrition.goal.fat} fat</li>`).appendTo(goalList);
   $(`<li>${nutrition.goal.protein} protein</li>`).appendTo(goalList);
 }
-
 
 // Function to update the leftovers Section
 function updateLeftoversSection() {
@@ -70,31 +82,9 @@ function updateLeftoversSection() {
   $(`<li>${nutrition.leftover.protein} protein</li>`).appendTo(leftoverList);
 }
 
-// Event listener for search button
-$("form").on("submit", function (event) {
-  event.preventDefault();
-
-  const query = searchInput.val();
-  const url = `https://api.spoonacular.com/recipes/guessNutrition?title=${query}&apiKey=${apiKey}`;
-
-  fetch(url, {
-    headers: {
-      "X-Api-Key": apiKey
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-
-      saveQuery(query, data);
-
-      showCards();
-    }
-    );
-});
-
 // function to save queries to local storage
 function saveQuery(query, data) {
-  // declare queries variable and parse queries from local storage or create empty object
+  // parse queries from local storage or create empty object
   let queries = JSON.parse(localStorage.getItem("queries")) || {};
 
   // check if query already exists in local storage
@@ -126,10 +116,11 @@ function hasLeftoverCalories(existingQueries, newQueryCalories) {
   let leftover = nutrition.goal.calories;
 
   // Loop through all existing query items and subtract calories from leftover
-  for (var [key, value] of Object.entries(existingQueries)) {
+  for (var [_key, value] of Object.entries(existingQueries)) {
     leftover -= value.calories;
   }
 
+  // If there are leftover calories, update the leftover calories and return true
   if (leftover >= newQueryCalories || Object.keys(existingQueries).length === 0) {
     nutrition.leftover.calories = leftover;
     leftover -= newQueryCalories;
@@ -141,13 +132,8 @@ function hasLeftoverCalories(existingQueries, newQueryCalories) {
   return false;
 }
 
-localStorage.setItem("goal", JSON.stringify(nutrition));
-
-// function to show cards
-/**
- * Renders the meal cards based on the stored queries in local storage.
- */
-function showCards() {
+// function to show cards. Renders the meal cards based on the stored queries in local storage.
+function updateCards() {
   mealList.empty();
 
   let queries = JSON.parse(localStorage.getItem("queries")) || {};
@@ -187,14 +173,16 @@ function showCards() {
   }
 }
 
+// function to save queries to local storage
 function saveQuery(query, data) {
   let queries = JSON.parse(localStorage.getItem("queries")) || {};
 
+  // Check if query already exists in local storage
   if (queries.hasOwnProperty(query)) {
     alert(`${query} has already been added to the meal list!`);
     return false;
   }
-
+// check if there are leftover calories
   if (!hasLeftoverCalories(queries, data.calories.value)) {
     alert(`You don't have enough calories for ${query}`);
     return false;
@@ -207,11 +195,12 @@ function saveQuery(query, data) {
     protein: data.protein.value
   };
 
-  localStorage.setItem("queries", JSON.stringify(queries)); // Update queries in local storage
+  // Update queries in local storage
+  localStorage.setItem("queries", JSON.stringify(queries));
 
   // Update leftover calories in local storage
   let leftover = nutrition.goal.calories;
-  for (var [key, value] of Object.entries(queries)) {
+  for (var [_key, value] of Object.entries(queries)) {
     leftover -= value.calories;
   }
   nutrition.leftover.calories = leftover;
@@ -220,6 +209,3 @@ function saveQuery(query, data) {
   return true;
 }
 
-showCards()
-updateGoalSection()
-updateLeftoversSection()
