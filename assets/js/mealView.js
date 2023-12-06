@@ -3,7 +3,6 @@
 
 var receipe  = [];
 var rnMeal = $('#radomMeal');
-var imgEl = $("<img>");
 
 
 function getRandomMeal(){
@@ -14,6 +13,8 @@ function getRandomMeal(){
             return response.json();
         })
         .then(function(data){
+            var imgEl = $("<img>");
+            imgEl.attr('class', 'radomMealImage')
             var mealName = $('<h4> '+ data.meals[0].strMeal+' </h4>');
             var pEl1 = $('<p> '+ data.meals[0].strCategory + '</p>');
             var pEl2 = $('<p> '+ data.meals[0].strArea + '</p>');
@@ -29,13 +30,17 @@ function getRandomMeal(){
 
             console.log(receipe);
 
-
             // if not null display the following
             if (data.meals[0].strYoutube){
-                console.log(data.meals[0].strYoutube);
+                var aElYT = $('<a href="'+data.meals[0].strYoutube+'">' );
+                aElYT.text("Youtube Video");
+                rnMeal.append(aElYT);
+
             }
             if (data.meals[0].strSource){
-                console.log(data.meals[0].strSource);
+                var aElSrc = $('<a href="'+data.meals[0].strSource+'">' );
+                aElSrc.text("Receipe");
+                rnMeal.append(aElSrc);
             }
 
         })
