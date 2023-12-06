@@ -21,26 +21,10 @@ function getRandomMeal(){
             
             //API returns upto 20 Ingredients and measurements
 
-            recipe.push({"Ingredient": data.meals[0].strIngredient1, "Measure" : data.meals[0].strMeasure1});
-            recipe.push({"Ingredient": data.meals[0].strIngredient2, "Measure" : data.meals[0].strMeasure2});
-            recipe.push({"Ingredient": data.meals[0].strIngredient3, "Measure" : data.meals[0].strMeasure3});
-            recipe.push({"Ingredient": data.meals[0].strIngredient4, "Measure" : data.meals[0].strMeasure4});
-            recipe.push({"Ingredient": data.meals[0].strIngredient5, "Measure" : data.meals[0].strMeasure5});
-            recipe.push({"Ingredient": data.meals[0].strIngredient6, "Measure" : data.meals[0].strMeasure6});
-            recipe.push({"Ingredient": data.meals[0].strIngredient7, "Measure" : data.meals[0].strMeasure7});
-            recipe.push({"Ingredient": data.meals[0].strIngredient8, "Measure" : data.meals[0].strMeasure8});
-            recipe.push({"Ingredient": data.meals[0].strIngredient9, "Measure" : data.meals[0].strMeasure9});
-            recipe.push({"Ingredient": data.meals[0].strIngredient10, "Measure" : data.meals[0].strMeasure10});
-            recipe.push({"Ingredient": data.meals[0].strIngredient11, "Measure" : data.meals[0].strMeasure11});
-            recipe.push({"Ingredient": data.meals[0].strIngredient12, "Measure" : data.meals[0].strMeasure12});
-            recipe.push({"Ingredient": data.meals[0].strIngredient13, "Measure" : data.meals[0].strMeasure13});
-            recipe.push({"Ingredient": data.meals[0].strIngredient14, "Measure" : data.meals[0].strMeasure14});
-            recipe.push({"Ingredient": data.meals[0].strIngredient15, "Measure" : data.meals[0].strMeasure15});
-            recipe.push({"Ingredient": data.meals[0].strIngredient16, "Measure" : data.meals[0].strMeasure16});
-            recipe.push({"Ingredient": data.meals[0].strIngredient17, "Measure" : data.meals[0].strMeasure17});
-            recipe.push({"Ingredient": data.meals[0].strIngredient18, "Measure" : data.meals[0].strMeasure18});
-            recipe.push({"Ingredient": data.meals[0].strIngredient19, "Measure" : data.meals[0].strMeasure19});
-            recipe.push({"Ingredient": data.meals[0].strIngredient20, "Measure" : data.meals[0].strMeasure20});
+            for (let index = 1; index <= 20; index++) {
+                recipe.push({"Ingredient": data.meals[0]['strIngredient'+index], "Measure" : data.meals[0]['strMeasure'+index]});
+            }
+
 
             for (let index = 0; index < recipe.length; index++) {
                 if (recipe[index].Ingredient === ""){
