@@ -4,7 +4,6 @@
 var recipe  = [];
 var rnMeal = $('#randomMeal');
 
-
 function getRandomMeal(){
     var randomMeal_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 
@@ -20,7 +19,6 @@ function getRandomMeal(){
             imgEl.attr('src', data.meals[0].strMealThumb);
             rnMeal.append(mealName, pEl1, imgEl);
             
-        
             //API returns upto 20 Ingredients and measurements
 
             recipe.push({"Ingredient": data.meals[0].strIngredient1, "Measure" : data.meals[0].strMeasure1});
@@ -44,15 +42,12 @@ function getRandomMeal(){
             recipe.push({"Ingredient": data.meals[0].strIngredient19, "Measure" : data.meals[0].strMeasure19});
             recipe.push({"Ingredient": data.meals[0].strIngredient20, "Measure" : data.meals[0].strMeasure20});
 
-            console.log(recipe);
-
             for (let index = 0; index < recipe.length; index++) {
                 if (recipe[index].Ingredient === ""){
                     break;
                 }
                 var pEl = $('<p>' + recipe[index].Ingredient + ' : '+ recipe[index].Measure + '</p>' );
                 rnMeal.append(pEl);
-                
             }
 
             // if not null display the following
@@ -60,29 +55,21 @@ function getRandomMeal(){
                 var aElYT = $('<a href="'+data.meals[0].strYoutube+'">' );
                 aElYT.text("Youtube Video");
                 rnMeal.append(aElYT);
-
             }
+
             if (data.meals[0].strSource){
                 var aElSrc = $('<a href="'+data.meals[0].strSource+'">' );
                 aElSrc.text("Receipe");
                 rnMeal.append(aElSrc);
             }
-
         })
     }
-
-function displayRandomMeal(){
-
-
-}
 
 // - API call to get image based on ingredient 
 
 function getImageFromIngredient(){
 
-
     var imgEl2 = $("<img>");
-
     var mainIngredient = ""; //get from storage
     var query_URL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast";
 
@@ -93,9 +80,6 @@ function getImageFromIngredient(){
             .then(function(data){
                 console.log(data.meals[0].strMealThumb);
             })
-    
         }
-
-// - Display image on page
 
 getRandomMeal();
