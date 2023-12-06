@@ -39,15 +39,15 @@
 
 <!--Question 1-->
 
-<div class="questionOne">
+<div class="nutritionQuestion">
 <h4>What are your calorie and macronutrient goals for the day?</h4>
 
 <div class="container">
     <div class="row justify-content-center g-2">
         <div class="col-md-3">
             <div class="form-floating">
-                <input type="number" class="form-control" id="floatingInputGrid1" placeholder="Calories">
-                <label for="floatingInputGrid1">Calories</label>
+                <input type="number" class="form-control" id="caloriesInput" placeholder="Calories">
+                <label for="caloriesInput">Calories</label>
             </div>
             <div class="invalid-feedback">
                 Please enter a relevant number between 1200 and 5000.
@@ -56,8 +56,8 @@
 
         <div class="col-md-3">
             <div class="form-floating">
-                <input type="number" class="form-control" id="floatingInputGrid2" placeholder="Protein">
-                <label for="floatingInputGrid2">Protein (g)</label>
+                <input type="number" class="form-control" id="proteinInput" placeholder="Protein">
+                <label for="proteinInput">Protein (g)</label>
             </div>
             <div class="invalid-feedback">
                 Please enter a relevant number between 50 and 500.
@@ -68,8 +68,8 @@
     <div class="row justify-content-center g-2">
         <div class="col-md-3">
             <div class="form-floating">
-                <input type="number" class="form-control" id="floatingInputGrid3" placeholder="Carbohydrates">
-                <label for="floatingInputGrid3">Carbohydrates (g)</label>
+                <input type="number" class="form-control" id="carbohydratesInput" placeholder="Carbohydrates">
+                <label for="carbohydratesInput">Carbohydrates (g)</label>
             </div>
             <div class="invalid-feedback">
                 Please enter a relevant number between 50 and 500.
@@ -78,8 +78,8 @@
 
         <div class="col-md-3">
             <div class="form-floating">
-                <input type="number" class="form-control" id="floatingInputGrid4" placeholder="Fat">
-                <label for="floatingInputGrid4">Fat (g)</label>
+                <input type="number" class="form-control" id="fatInput" placeholder="Fat">
+                <label for="fatInput">Fat (g)</label>
             </div>
             <div class="invalid-feedback">
                 Please enter a relevant number between 50 and 500.
@@ -89,21 +89,21 @@
 </div>
 </div>
 
-<div class="buttonOne">
+<div class="nutritionButton">
 <button type="button" class="btn btn-primary mt-3">Next</button>
 </div>
 
 <!--Question 2-->
 
-<div class="questionTwo">
+<div class="mealQuestion">
 <h4>How many meals do you plan on making?</h4>
 
 <div class="container">
     <div class="row justify-content-center g-2">
         <div class="col-md-3">
             <div class="form-floating">
-                <input type="number" class="form-control" id="floatingInputGrid5" placeholder="Number of Meals">
-                <label for="floatingInputGrid1">Number of Meals</label>
+                <input type="number" class="form-control" id="mealsInput" placeholder="Number of Meals">
+                <label for="mealsInput">Number of Meals</label>
             </div>
             <div class="invalid-feedback">
                 Please enter a relevant number between 1 and 10.
@@ -113,31 +113,31 @@
 </div>
 </div>
 
-<div class="buttonTwo">
+<div class="mealButton">
     <button type="button" class="btn btn-primary mt-3">Next</button>
     </div>
 
 <!--Question 3-->
 
-<div class="questionThree">
+<div class="allergiesQuestion">
     <h4>Are you allergic to any foods/ingredients?</h4>
     
     <div class="container">
         <div class="row justify-content-center g-2">
             <div class="col-md-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInputGrid6" placeholder="Food allergies">
-                    <label for="floatingInputGrid1">Food Allergies</label>
+                    <input type="text" class="form-control" id="allergiesInput" placeholder="Food allergies">
+                    <label for="allergiesInput">Food Allergies</label>
                 </div>
                 <div class="invalid-feedback">
-                    Please enter relevant text.
+                    Please enter relevant text or NA if not applicable.
                 </div>
             </div>
         </div>
     </div>
     </div>
     
-<div class="buttonThree">
+<div class="allergiesButton">
     <button type="button" class="btn btn-primary mt-3">Finish</button>
     </div>
 

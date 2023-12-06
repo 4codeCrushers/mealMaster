@@ -1,7 +1,7 @@
 // hiding all questions
 
 function hideAll () {
-    $('.questionOne, .questionTwo, .questionThree, .buttonOne, .buttonTwo, .buttonThree').hide();
+    $('.nutritionQuestion, .mealQuestion, .allergiesQuestion, .nutritionButton, .mealButton, .allergiesButton').hide();
 }
 
 // function to show Qs when ready
@@ -14,42 +14,42 @@ function showQuestionAndButton (questionClass, buttonClass) {
 // Code to only show Q1 when quiz page loads
 
 hideAll();
-showQuestionAndButton('.questionOne, .buttonOne');
+showQuestionAndButton('.nutritionQuestion, .nutritionButton');
 
 // Question One
 
-$('.buttonOne button').on('click', function () {
+$('.nutritionButton button').on('click', function () {
 
     var quizGoal = {
-        calories: $('#floatingInputGrid1').val(),
-        protein: $('#floatingInputGrid2').val(),
-        carbohydrates: $('#floatingInputGrid3').val(),
-        fat: $('#floatingInputGrid4').val(),
+        calories: $('#caloriesInput').val(),
+        protein: $('#proteinInput').val(),
+        carbohydrates: $('#carbohydratesInput').val(),
+        fat: $('#fatInput').val(),
     }
 
     localStorage.setItem('quizGoal', JSON.stringify(quizGoal));
 
-    showQuestionAndButton('.questionTwo, .buttonTwo');
+    showQuestionAndButton('.mealQuestion, .mealButton');
 
 });
 
 
 // Question Two
 
-$('.buttonTwo button').on('click', function () {
+$('.mealButton button').on('click', function () {
 
-    var numberOfMeals = $('#floatingInputGrid5').val();
+    var numberOfMeals = $('#mealsInput').val();
     localStorage.setItem('numberOfMeals', numberOfMeals);
 
-    showQuestionAndButton('.questionThree, .buttonThree');
+    showQuestionAndButton('.allergiesQuestion, .allergiesButton');
 
 });
 
 // Question Three
 
-$('.buttonThree button').on('click', function () {
+$('.allergiesButton button').on('click', function () {
 
-    var foodAllergies = $('#floatingInputGrid6').val();
+    var foodAllergies = $('#allergiesInput').val();
     localStorage.setItem('foodAllergies', foodAllergies);
         
     window.location.href = '#';
