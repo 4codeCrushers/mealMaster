@@ -8,8 +8,9 @@ const nutrition = nutritionInfo();
 // Get the <span> element that closes the modal
 const span = $(".close")[0];
 // Get the modal
-var modal = $("#myModal");
-
+const modal = $("#myModal");
+const modalMessage = $(".modal-message");
+const modalContent = $(".modal-content");
 // Load page content
 loadContent()
 
@@ -154,14 +155,17 @@ function saveQuery(query, data, msg) {
 
   // Check if query already exists in local storage
   if (queries.hasOwnProperty(query)) {
-    // alert(`${query} has already been added to the meal list!`, msg);
-    // return false;
-    $('#myModal').css("display", "block");
+    modalMessage.text(`You already have added ${query} to your list!`);
+    modalContent.css("background-color", "#EFB495");
+    modal.css("display", "block");
     return false;
   }
-// check if there are leftover calories
+
+  // Check if there are enough leftover calories
   if (!hasLeftoverCalories(queries, data.calories.value)) {
-    $('#myModal').css("display", "block");
+    modalMessage.text("You don't have enough calories left! :(");
+    modalContent.css("background-color", "#EF9595");
+    modal.css("display", "block");
     return false;
   }
 
