@@ -2,7 +2,7 @@
 // - Display random receipe
 
 var receipe  = [];
-var rnMeal = $('#radomMeal');
+var rnMeal = $('#randomMeal');
 
 
 function getRandomMeal(){
@@ -14,12 +14,11 @@ function getRandomMeal(){
         })
         .then(function(data){
             var imgEl = $("<img>");
-            imgEl.attr('class', 'radomMealImage')
+            imgEl.attr('class', 'randomMealImage')
             var mealName = $('<h4> '+ data.meals[0].strMeal+' </h4>');
-            var pEl1 = $('<p> '+ data.meals[0].strCategory + '</p>');
-            var pEl2 = $('<p> '+ data.meals[0].strArea + '</p>');
+            var pEl1 = $('<p> '+ data.meals[0].strCategory+", " + data.meals[0].strArea +'</p>');
             imgEl.attr('src', data.meals[0].strMealThumb);
-            rnMeal.append(mealName, pEl1,pEl2, imgEl);
+            rnMeal.append(mealName, pEl1, imgEl);
             
         
             //API returns upto 20 Ingredients and measurements
@@ -51,9 +50,9 @@ function displayRandomMeal(){
 
 }
 
-// - API call to image api
+// - API call to get image based on ingredient 
 
-function getImageFromIngreident(){
+function getImageFromIngredient(){
 
 
     var imgEl2 = $("<img>");
