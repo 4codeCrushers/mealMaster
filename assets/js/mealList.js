@@ -4,8 +4,13 @@ const searchBtn = $("#search-btn");
 const mealList = $("#meal-list");
 const goalList = $("#goal-list");
 const leftoverList = $("#leftover-list");
-const nutrition = nutritionInfo()
-
+const nutrition = nutritionInfo();
+// Get the <span> element that closes the modal
+const span = $(".close")[0];
+// Get the modal
+const modal = $("#alertMsg");
+const modalMessage = $(".modal-message");
+const modalContent = $(".modal-content");
 // Load page content
 loadContent()
 
@@ -82,35 +87,6 @@ function updateLeftoversSection() {
   $(`<li>${nutrition.leftover.protein} protein</li>`).appendTo(leftoverList);
 }
 
-// function to save queries to local storage
-function saveQuery(query, data) {
-  // parse queries from local storage or create empty object
-  let queries = JSON.parse(localStorage.getItem("queries")) || {};
-
-  // check if query already exists in local storage
-  if (queries.hasOwnProperty(query)) {
-    alert(`${query} has already been added to the meal list!`);
-    return false;
-  }
-
-  // check if there are leftover calories
-  if (!hasLeftoverCalories(queries, data.calories.value)) {
-    alert(`You don't have enough calories for ${query}`);
-    return false;
-  }
-
-  // add query to queries object
-  queries[query] = {
-    calories: data.calories.value,
-    carbs: data.carbs.value,
-    fat: data.fat.value,
-    protein: data.protein.value
-  };
-
-  // save queries to local storage
-  localStorage.setItem("queries", JSON.stringify(queries));
-}
-
 // function to check if there are leftover calories
 function hasLeftoverCalories(existingQueries, newQueryCalories) {
   let leftover = nutrition.goal.calories;
@@ -174,17 +150,22 @@ function updateCards() {
 }
 
 // function to save queries to local storage
-function saveQuery(query, data) {
+function saveQuery(query, data, msg) {
   let queries = JSON.parse(localStorage.getItem("queries")) || {};
 
   // Check if query already exists in local storage
   if (queries.hasOwnProperty(query)) {
-    alert(`${query} has already been added to the meal list!`);
+    modalMessage.text(`You already have added ${query} to your list!`);
+    modalContent.css("background-color", "#EFB495");
+    modal.css("display", "block");
     return false;
   }
-// check if there are leftover calories
+
+  // Check if there are enough leftover calories
   if (!hasLeftoverCalories(queries, data.calories.value)) {
-    alert(`You don't have enough calories for ${query}`);
+    modalMessage.text("You don't have enough calories left! :(");
+    modalContent.css("background-color", "#EF9595");
+    modal.css("display", "block");
     return false;
   }
 
@@ -209,3 +190,20 @@ function saveQuery(query, data) {
   return true;
 }
 
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.css("display", "none");
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.css("display", "none");
+  }
+}
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.css("display", "none");
+  }
+}
