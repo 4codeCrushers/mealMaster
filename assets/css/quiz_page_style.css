@@ -11,11 +11,11 @@ h4 {
     text-align: center;
 }
 
-.questionOne, .questionTwo, .questionThree {
+.nutritionQuestion, .mealQuestion, .allergiesQuestion {
     margin-top: 40px;
 }
 
-.buttonOne, .buttonTwo, .buttonThree {
+.nutritionButton, .mealButton, .allergiesButton {
     text-align: center;
 }
 
