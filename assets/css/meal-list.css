@@ -25,6 +25,10 @@
   padding: 2% 15% 0 15%;
 }
 
+.custom-width {
+  width: 500px;
+}
+
 #meal-list {
   padding-top: 4%;
 }
