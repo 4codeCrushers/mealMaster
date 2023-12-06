@@ -20,15 +20,14 @@ showQuestionAndButton('.questionOne, .buttonOne');
 
 $('.buttonOne button').on('click', function () {
 
-    var calories = $('#floatingInputGrid1').val();
-    var protein = $('#floatingInputGrid2').val();
-    var carbohydrates = $('#floatingInputGrid3').val();
-    var fat = $('#floatingInputGrid4').val();
+    var quizGoal = {
+        calories: $('#floatingInputGrid1').val(),
+        protein: $('#floatingInputGrid2').val(),
+        carbohydrates: $('#floatingInputGrid3').val(),
+        fat: $('#floatingInputGrid4').val(),
+    }
 
-    localStorage.setItem('calories', calories);
-    localStorage.setItem('protein', protein);
-    localStorage.setItem('carbohydrates', carbohydrates);
-    localStorage.setItem('fat', fat);
+    localStorage.setItem('quizGoal', JSON.stringify(quizGoal));
 
     showQuestionAndButton('.questionTwo, .buttonTwo');
 
