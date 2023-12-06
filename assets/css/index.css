@@ -1,0 +1,33 @@
+/* calendar styles */
+#today {
+    display: flex;
+    justify-content: center;
+    padding-top: 2%;
+}
+.calendar { padding: 1% 10% 2.5% 10%; }
+.day { display: inline-block }
+.day:hover { background-color: #C1E1C1; }
+.add-icon {
+    opacity: 50%;
+    height: 30px;
+    width: auto;
+    display: flex;
+}
+.day:hover .add-icon { display: flex !important; }
+
+/* footer styles */
+.footer-menu {
+    padding-left: 40%;
+    padding-right: 40%;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    justify-content: space-around;
+    font-size: 16px;
+}
+.footer-name {
+    opacity: 50%;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+}
