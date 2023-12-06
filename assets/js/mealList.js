@@ -6,34 +6,69 @@ const goalList = $("#goal-list");
 const leftoverList = $("#leftover-list");
 
 
-var nutritionInfo = function () {
-  const nutrition = {
-    goal: { calories: 2000, carbs: 200, fat: 50, protein: 100 },
-    leftover: { calories: 2000, carbs: 10, fat: 30, protein: 60 }
-  };
+// Event listener for search button
+$("form").on("submit", function (event) {
+  event.preventDefault();
 
-  localStorage.setItem("goal", JSON.stringify(nutrition));
+  const query = searchInput.val();
+  const url = `https://api.spoonacular.com/recipes/guessNutrition?title=${query}&apiKey=${apiKey}`;
+
+  fetch(url, {
+    headers: {
+      "X-Api-Key": apiKey
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+
+      saveQuery(query, data);
+      showCards();
+      // Update the leftovers section
+      updateLeftoversSection();
+    }
+    );
+});
+
+// function to save nutrition info to local storage
+var nutritionInfo = function () {
+  let nutrition = JSON.parse(localStorage.getItem("goal"));
+
+  if (!nutrition) {
+    nutrition = {
+      goal: { calories: 2000, carbs: 200, fat: 50, protein: 100 },
+      leftover: { calories: 2000, carbs: 10, fat: 30, protein: 60 }
+    };
+
+    localStorage.setItem("goal", JSON.stringify(nutrition));
+  }
+
   return nutrition;
 }
 
 // parse nutrition from local storage or create empty object
-nutritionInfo();
+const nutrition = nutritionInfo();
 
-// parse queries from local storage or create empty array
-const queries = JSON.parse(localStorage.getItem("queries")) || {};
-localStorage.setItem("queries", JSON.stringify(queries));
+function updateGoalSection() {
+  goalList.empty();
 
-const nutrition = JSON.parse(localStorage.getItem("goal")) || {};
+  $(`<li>${nutrition.goal.calories} calories</li>`).appendTo(goalList);
+  $(`<li>${nutrition.goal.carbs} carbs</li>`).appendTo(goalList);
+  $(`<li>${nutrition.goal.fat} fat</li>`).appendTo(goalList);
+  $(`<li>${nutrition.goal.protein} protein</li>`).appendTo(goalList);
+}
 
-$(`<li>${nutrition.goal.calories} calories</li>`).appendTo(goalList);
-$(`<li>${nutrition.goal.carbs} carbs</li>`).appendTo(goalList);
-$(`<li>${nutrition.goal.fat} fat</li>`).appendTo(goalList);
-$(`<li>${nutrition.goal.protein} protein</li>`).appendTo(goalList);
 
-$(`<li>${nutrition.leftover.calories} calories</li>`).appendTo(leftoverList);
-$(`<li>${nutrition.leftover.carbs} carbs</li>`).appendTo(leftoverList);
-$(`<li>${nutrition.leftover.fat} fat</li>`).appendTo(leftoverList);
-$(`<li>${nutrition.leftover.protein} protein</li>`).appendTo(leftoverList);
+// Function to update the leftovers Section
+function updateLeftoversSection() {
+  // Clear the existing leftovers list
+  leftoverList.empty();
+
+  // Append the updated leftovers information to the list
+  $(`<li>${nutrition.leftover.calories} calories</li>`).appendTo(leftoverList);
+  $(`<li>${nutrition.leftover.carbs} carbs</li>`).appendTo(leftoverList);
+  $(`<li>${nutrition.leftover.fat} fat</li>`).appendTo(leftoverList);
+  $(`<li>${nutrition.leftover.protein} protein</li>`).appendTo(leftoverList);
+}
 
 // Event listener for search button
 $("form").on("submit", function (event) {
@@ -106,7 +141,12 @@ function hasLeftoverCalories(existingQueries, newQueryCalories) {
   return false;
 }
 
+localStorage.setItem("goal", JSON.stringify(nutrition));
+
 // function to show cards
+/**
+ * Renders the meal cards based on the stored queries in local storage.
+ */
 function showCards() {
   mealList.empty();
 
@@ -147,4 +187,39 @@ function showCards() {
   }
 }
 
+function saveQuery(query, data) {
+  let queries = JSON.parse(localStorage.getItem("queries")) || {};
+
+  if (queries.hasOwnProperty(query)) {
+    alert(`${query} has already been added to the meal list!`);
+    return false;
+  }
+
+  if (!hasLeftoverCalories(queries, data.calories.value)) {
+    alert(`You don't have enough calories for ${query}`);
+    return false;
+  }
+
+  queries[query] = {
+    calories: data.calories.value,
+    carbs: data.carbs.value,
+    fat: data.fat.value,
+    protein: data.protein.value
+  };
+
+  localStorage.setItem("queries", JSON.stringify(queries)); // Update queries in local storage
+
+  // Update leftover calories in local storage
+  let leftover = nutrition.goal.calories;
+  for (var [key, value] of Object.entries(queries)) {
+    leftover -= value.calories;
+  }
+  nutrition.leftover.calories = leftover;
+  localStorage.setItem("goal", JSON.stringify(nutrition));
+
+  return true;
+}
+
 showCards()
+updateGoalSection()
+updateLeftoversSection()
