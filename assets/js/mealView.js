@@ -12,16 +12,22 @@ fetch(randomMeal_URL)
             console.log(data.meals[0].strCategory);
             console.log(data.meals[0].strArea);
             console.log(data.meals[0].strMealThumb);
+        
+            //API returns upto 20 Ingredients and measurements
 
-            // for iterate through until strIngredient1===null 
+            var receipe  = [];
 
             console.log(data.meals[0].strIngredient1 + " : " + data.meals[0].strMeasure1);
-            console.log(data.meals[0].strIngredient2 + " : " + data.meals[0].strMeasure2);
-            console.log(data.meals[0].strIngredient3 + " : " + data.meals[0].strMeasure3);
+            // console.log(data.meals[0].strIngredient2 + " : " + data.meals[0].strMeasure2);
+            // console.log(data.meals[0].strIngredient3 + " : " + data.meals[0].strMeasure3);
 
             // if not null display the following
-            console.log(data.meals[0].strYoutube);
-            console.log(data.meals[0].strSource);
+            if (data.meals[0].strYoutube){
+                console.log(data.meals[0].strYoutube);
+            }
+            if (data.meals[0].strSource){
+                console.log(data.meals[0].strSource);
+            }
 
         })
 
