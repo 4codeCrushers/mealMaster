@@ -29,6 +29,11 @@
   padding-top: 4%;
 }
 
+#meal-list .card {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
 .save-btn {
   margin-top: 3%;
   display: block;
