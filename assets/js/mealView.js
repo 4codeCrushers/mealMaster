@@ -4,8 +4,9 @@
 var recipe = [];
 var rnMeal = $('#randomMeal');
 
-function getRandomMeal() {
-  var randomMeal_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
+function getRandomMeal () {
+
+   randomMeal_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 
 
     fetch(randomMeal_URL)
@@ -49,8 +50,7 @@ function getRandomMeal() {
                 aElSrc.text("Recipe");
                 rnMeal.append(aElSrc);
             }
-        })
-    }
+ 
 
       for (let index = 0; index < recipe.length; index++) {
         if (recipe[index].Ingredient === "") {
@@ -60,23 +60,29 @@ function getRandomMeal() {
         rnMeal.append(pEl);
       }
 
+    })
+  }
 
 
 // - API call to get image based on ingredient
+function getSelectedMeal () {
+  return localStorage.getItem("selectedMeal");
+}
 
-function getImageFromIngredient() {
+function getImageFromIngredient () {
 
-  var imgEl2 = $("<img>");
-  var mainIngredient = ""; //get from storage
-  var query_URL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast";
+  var getMeal = getSelectedMeal ();  
+  var randomMeal_URL = "https://www.themealdb.com/api/json/v1/1/search.php?s="+getMeal;
 
-  fetch(query_URL)
+  fetch(randomMeal_URL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data.meals[0].strMealThumb);
+      if (!data.meals)
+      console.log("no food!!");
     })
 }
 
 getRandomMeal();
+getImageFromIngredient ()
