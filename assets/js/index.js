@@ -1,16 +1,5 @@
 // Save the selected day to localStorage
 $(document).ready(function () {
-  var dayElements = $('.day');
-  dayElements.each(function () {
-    $(this).on('click', function () {
-      var dayOfMonth = $(this).find('.card-title').text();
-      // selected day is stored in dayOfMonth variable
-      localStorage.setItem('selectedDay', dayOfMonth);
-
-      // Open the quiz page
-      window.location.href = 'quiz.html';
-    });
-  });
   // Displays today's date
   var date = dayjs().format("MMMM YYYY");
   $("#today").text(date);
@@ -30,8 +19,6 @@ $(document).ready(function () {
     newCard.click(function () {
       var selectedDay = $(this).find('.card-title').text();
       localStorage.setItem('selectedDay', selectedDay);
-      // Open the quiz page
-      window.location.href = 'quiz.html';
     });
     calendarContainer.append(newCard);
   }

@@ -125,7 +125,7 @@ function updateCards() {
         <p class="card-text">Carbs: ${value.carbs}</p>
         <p class="card-text">Fat: ${value.fat}</p>
         <p class="card-text">Protein: ${value.protein}</p>
-        <a href="#" class="btn btn-primary">Check Recipe!</a>
+        <a href="mealView.html" class="btn btn-primary">Check Recipe!</a>
       </div>
     </div>
   `;
