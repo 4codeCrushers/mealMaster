@@ -31,30 +31,30 @@ $('.nutritionButton button').on('click', function () {
 
     if (quizGoal.calories < 1200 || quizGoal.calories > 5000) {
         feedbackNutrition.eq(0).show();
-        return;
     } else {
         feedbackNutrition.eq(0).hide();
     }
 
     if (quizGoal.protein < 50 || quizGoal.protein > 500) {
         feedbackNutrition.eq(1).show();
-        return;
     } else {
         feedbackNutrition.eq(1).hide();
     }
 
     if (quizGoal.carbohydrates < 50 || quizGoal.carbohydrates > 500) {
         feedbackNutrition.eq(2).show();
-        return;
     } else {
         feedbackNutrition.eq(2).hide();
     }
 
     if (quizGoal.fat < 50 || quizGoal.fat > 500) {
         feedbackNutrition.eq(3).show();
-        return;
     } else {
         feedbackNutrition.eq(3).hide();
+    }
+
+    if (feedbackNutrition.filter(':visible').length  >0) {
+        return;
     }
 
     localStorage.setItem('quizGoal', JSON.stringify(quizGoal));
@@ -87,7 +87,11 @@ $('.allergiesButton button').on('click', function () {
     var foodAllergies = $('#allergiesInput').val();
     var feedbackAllergies = $('.allergiesQuestion .invalid-feedback');
 
-    if (foodAllergies === '') {
+    // Only allow text in input box 
+
+    var lettersOnlyRegex = /^[a-zA-Z\s]+$/;
+
+    if (!lettersOnlyRegex.test(foodAllergies)) {
         feedbackAllergies.show();
         return;
     } else {
