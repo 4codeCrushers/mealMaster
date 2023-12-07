@@ -22,7 +22,7 @@ $(document).ready(function () {
             '<div class="card-body">' +
             '<h5 class="card-title">' + day + '</h5>' +
             '<p class="card-text"></p>' +
-            '<img src="assets/images/add.png" class="card-img add-icon mx-auto" style="display: none;" alt="...">' +
+            '<img src="assets/images/add.png" class="card-img add-icon mx-auto" style="display: none;" alt="day">' +
             `<a href="quiz.html" class="stretched-link"></a>` +
             '</div>' +
             '</div>');
