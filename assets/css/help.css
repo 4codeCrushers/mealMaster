@@ -1,0 +1,26 @@
+/* footer styles */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.wrapper {
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+.page-footer { grid-row: 3; }
+.footer-menu {
+    padding-left: 40%;
+    padding-right: 40%;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    justify-content: space-around;
+    font-size: 16px;
+}
+.footer-name {
+    opacity: 50%;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+}

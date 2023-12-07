@@ -2,59 +2,115 @@
 <html>
   <head>
     <title>mealMaster</title>
-    <link rel="stylesheet" href="./assets/css/meal-list.css">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/meal-list.css">
   </head>
   <body>
-    <header class="container-fluid text-center p-2">
-      <h1 id="main-header">Create Your Meal List</h1>
-    </header>
-    <div class="container-fluid">
-      <div class="row nutrition-info justify-content-center">
-        <div class="col-6 d-flex info-col" id="goal-column">
-          <h2 id="goal-header">Your Nutrition Goal:</h2>
-          <div class="goal-list">
-            <ul id="goal-list"></ul>
+    <div class="wrapper">
+      <!-- nav-bar -->
+      <header class="page-header">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">MealMaster</a>
+            <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page"
+                    href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="help.html">Help</a>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="col-6 d-flex info-col" id="leftover-column">
-          <h2 id="nutrition-header">Nutrition Leftover:</h2>
-          <div class="leftover-list">
-            <ul id="leftover-list"></ul>
-          </div>
-        </div>
-      </div>
-      <!-- Search -->
-      <p id="sub-header">Search for your favorite meals and add them to your
-        list!</p>
-      <div class="row">
-        <form class="d-flex search">
-          <input class="form-control me-2" type="search" placeholder="Search"
-            aria-label="Search" id="search-input">
-          <button class="btn btn-outline-success" type="submit" id="search-btn">Search</button>
-        </form>
-      </div>
-      <div class="row">
-        <!-- The Modal -->
-        <div id="alertMsg" class="modal">
+        </nav>
+        <h1 id="main-header">Create Your Meal List</h1>
+      </header>
 
-          <!-- Modal content -->
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <p class="modal-message"></p>
+      <!-- body -->
+      <article class="page-body">
+        <div class="container-fluid">
+          <div class="row nutrition-info justify-content-center">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title" id="goal-header">Your Nutrition Goal:</h5>
+                  <div class="goal-list">
+                    <ul id="goal-list"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title" id="nutrition-header">Nutrition
+                    Leftover:</h5>
+                  <div class="leftover-list">
+                    <ul id="leftover-list"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
         </div>
-        <div id="meal-list"></div>
-      </div>
-    </div>
-    <!-- jQuery -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="./assets/js/mealList.js"></script>
-  </body>
-</html>
+
+        <!-- Search -->
+        <div
+          class="search-section d-flex flex-column align-items-center justify-content-center">
+          <p id="sub-header">Search for your favorite meals and add them to your
+            list!</p>
+          <div class="row">
+            <form class="d-flex search">
+              <input class="form-control me-2 custom-width" type="search"
+                placeholder="Search"
+                aria-label="Search" id="search-input">
+              <button class="btn btn-outline-success" type="submit"
+                id="search-btn">Search</button>
+            </form>
+          </div>
+          <div class="row">
+            <div id="meal-list"></div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg save-btn">Save</button>
+      </article>
+
+      <!-- footer -->
+      <footer class="page-footer">
+        <div class="card footer">
+          <div class="card-body">
+            <blockquote class="blockquote footer-menu mb-0">
+              <p class="footer-link">Home</p>
+              <p class="footer-link">About</p>
+              <p class="footer-link">Help</p>
+            </blockquote>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p class="footer-name">MealMaster</p>
+            </blockquote>
+          </div>
+        </div>
+      </footer>
+
+      <!-- jQuery -->
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="./assets/js/mealList.js"></script>
+    </body>
+  </html>
