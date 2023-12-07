@@ -1,14 +1,19 @@
-# MealMaster
+# mealMaster
 
-Web app to help with your nutritional needs.
+MealMaster is a web application to help with all your nutritional needs.
 
 ## Description
 
-The MealMaster web app aims to meet the nutritinal needs of someone living a healthy balanced lifestyle. 
-MealMaster allows the user to calculate and identify their nutritional goals through an interactive quiz.
-With the aid of a Calendar, the user can track the goals for today and prepare for the days and weeks ahead.
-MealMaster allows the user to record nutritional information, giving feedback of the remaining nutrition values for the day. 
-Information is stored to the users browser storage, allowing the user to easily monitor progress on return.
+The MealMaster web application aims to help users live a healthy, balanced lifestyle by assisting them in meeting their nutritional needs.
+
+As a User,
+I want to be able to identify the calories in ingredients and search for recipes,
+So that I can plan meals in advance and stick to my macro requirements.
+MealMaster allows the user to select a specific date on a calendar and then calculate and identify their nutritional goals for that day through an interactive quiz.
+
+The user can then search for ingredients and recipes to prepare for the days and weeks ahead. MealMaster allows the user to record nutritional information, giving feedback on the remaining nutritional allowances for the day.
+
+Information is stored in the user's browser storage, allowing them to easily monitor progress on return to the application.
 
 ## Screenshot
 
@@ -19,14 +24,14 @@ n/a
 
 ## Usage
 
-The Web app can used directly from your browser. <a href"" >link</a>
+The MealMaster web app can be used directly from your browser through the <a href"">link</a>
 
 ## Credits
 
 Ewelina Sobora <a href="https://github.com/ewelinasobora">Github</a>
 Lucy Bonfield <a href="https://github.com/lucybonfield">Github</a>
 Dominic Brown <a href="https://github.com/dombrown95">Github</a>
-Tom Palnig <a href="https://github.com/ph8tfunk">Github</a>
+Tom Paling <a href="https://github.com/ph8tfunk">Github</a>
 
 ## License
 MIT license
