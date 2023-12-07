@@ -31,6 +31,7 @@ $("form").on("submit", function (event) {
       saveQuery(query, data);
       updateCards();
       updateLeftoversSection();
+      searchInput.val("");
     });
 });
 
