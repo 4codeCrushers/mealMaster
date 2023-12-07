@@ -35,15 +35,17 @@ function getRandomMeal(){
             }
 
             // if not null display the following
-            if (data.meals[0].strYoutube){
-                var aElYT = $('<a href="'+data.meals[0].strYoutube+'">' );
-                aElYT.text("Youtube Video");
-                rnMeal.append(aElYT);
-            }
+            if (data.meals[0].strYoutube) {
+                var buttonEl = $('<a href="' + data.meals[0].strYoutube + '" class="btn btn-primary btn-danger" target="_blank">');
+                var iconEl = $('<img src="assets/images/youtube.svg" alt="Icon" class="icon">');
+                buttonEl.append(iconEl);
+                buttonEl.append(" Youtube");
+                $('#randomMeal').append(buttonEl);
+              }
 
             if (data.meals[0].strSource){
                 var aElSrc = $('<a href="'+data.meals[0].strSource+'">' );
-                aElSrc.text("Receipe");
+                aElSrc.text("Recipe");
                 rnMeal.append(aElSrc);
             }
         })
