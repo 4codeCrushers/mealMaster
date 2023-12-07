@@ -7,17 +7,24 @@ var rnMeal = $('#randomMeal');
 function getRandomMeal() {
   var randomMeal_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 
-  fetch(randomMeal_URL)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      var imgEl = $("<img>");
-      imgEl.attr('class', 'randomMealImage')
-      var mealName = $('<h4> ' + data.meals[0].strMeal + ' </h4>');
-      var pEl1 = $('<p> ' + data.meals[0].strCategory + ", " + data.meals[0].strArea + '</p>');
-      imgEl.attr('src', data.meals[0].strMealThumb);
-      rnMeal.append(mealName, pEl1, imgEl);
+
+    fetch(randomMeal_URL)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            var imgEl = $("<img>");
+            imgEl.attr('class', 'randomMealImage');
+            var mealName = $('<h5> ' + data.meals[0].strMeal + ' </h5>');
+            var pEl1 = $('<p> ' + data.meals[0].strCategory + ", " + data.meals[0].strArea + '</p>');
+            imgEl.attr('src', data.meals[0].strMealThumb);
+            rnMeal.append(mealName, pEl1, imgEl);
+            var ingredientsTitle = $('<h5 class="ingredients-title">Ingredients:</h5>');
+            rnMeal.append(ingredientsTitle);
+            ingredientsTitle.css('margin-top', '10px');
+            
+            //API returns upto 20 Ingredients and measurements
+
 
       //API returns upto 20 Ingredients and measurements
 
@@ -25,6 +32,25 @@ function getRandomMeal() {
         recipe.push({ "Ingredient": data.meals[0]['strIngredient' + index], "Measure": data.meals[0]['strMeasure' + index] });
       }
 
+
+
+            // if not null display the following
+            if (data.meals[0].strYoutube) {
+                var buttonEl = $('<a href="' + data.meals[0].strYoutube + '" class="btn btn-primary btn-danger" target="_blank">');
+                var iconEl = $('<img src="assets/images/youtube.svg" alt="Icon" class="icon">');
+                buttonEl.append(iconEl);
+                buttonEl.append(" Youtube");
+                buttonEl.css('margin-right', '10px')
+                $('#randomMeal').append(buttonEl);
+              }
+
+            if (data.meals[0].strSource){
+                var aElSrc = $('<a href="'+data.meals[0].strSource + '" class="btn btn-primary" target="_blank">');
+                aElSrc.text("Recipe");
+                rnMeal.append(aElSrc);
+            }
+        })
+    }
 
       for (let index = 0; index < recipe.length; index++) {
         if (recipe[index].Ingredient === "") {
@@ -34,20 +60,7 @@ function getRandomMeal() {
         rnMeal.append(pEl);
       }
 
-      // if not null display the following
-      if (data.meals[0].strYoutube) {
-        var aElYT = $('<a href="' + data.meals[0].strYoutube + '">');
-        aElYT.text("Youtube Video");
-        rnMeal.append(aElYT);
-      }
 
-      if (data.meals[0].strSource) {
-        var aElSrc = $('<a href="' + data.meals[0].strSource + '">');
-        aElSrc.text("Receipe");
-        rnMeal.append(aElSrc);
-      }
-    })
-}
 
 // - API call to get image based on ingredient
 
