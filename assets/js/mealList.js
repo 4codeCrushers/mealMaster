@@ -8,7 +8,7 @@ const nutrition = nutritionInfo();
 // Get the <span> element that closes the modal
 const span = $(".close")[0];
 // Get the modal
-const modal = $("#alertMsg");
+const modal = $("#alert-modal");
 const modalMessage = $(".modal-message");
 const modalContent = $(".modal-content");
 // Load page content
@@ -205,4 +205,3 @@ window.onclick = function (event) {
     modal.css("display", "none");
   }
 }
-
