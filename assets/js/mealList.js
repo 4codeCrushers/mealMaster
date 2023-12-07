@@ -28,18 +28,17 @@ $("form").on("submit", function (event) {
   })
     .then(response => response.json())
     .then(data => {
-
       saveQuery(query, data);
       updateCards();
       updateLeftoversSection();
-    }
-    );
+      searchInput.val("");
+    });
 });
 
 // function to load page content
 function loadContent() {
   // Update the goal section
-  localStorage.setItem("goal", JSON.stringify(nutrition));
+  localStorage.setItem("nutrition", JSON.stringify(nutrition));
   // Update the goal section, the leftovers section, and the cards
   updateGoalSection(nutrition)
   updateLeftoversSection(nutrition)
@@ -49,16 +48,17 @@ function loadContent() {
 // function to save nutrition info to local storage
 function nutritionInfo() {
   // Parse nutrition info from local storage or create empty object
-  let nutrition = JSON.parse(localStorage.getItem("goal"));
+  let nutrition = JSON.parse(localStorage.getItem("nutrition"));
+  let quizGoal = JSON.parse(localStorage.getItem("quizGoal"));
 
   if (!nutrition) {
     nutrition = {
-      goal: { calories: 2000, carbs: 200, fat: 50, protein: 100 },
-      leftover: { calories: 2000, carbs: 10, fat: 30, protein: 60 }
+      goal: { calories: quizGoal.calories, carbohydrates: quizGoal.carbohydrates, fat: quizGoal.fat, protein: quizGoal.protein },
+      leftover: { calories: quizGoal.calories, carbohydrates: quizGoal.carbohydrates, fat: quizGoal.fat, protein: quizGoal.protein }
     };
 
     // Save nutrition info to local storage
-    localStorage.setItem("goal", JSON.stringify(nutrition));
+    localStorage.setItem("nutrition", JSON.stringify(nutrition));
   }
 
   return nutrition;
@@ -70,7 +70,7 @@ function updateGoalSection() {
   goalList.empty();
 
   $(`<li>${nutrition.goal.calories} calories</li>`).appendTo(goalList);
-  $(`<li>${nutrition.goal.carbs} carbs</li>`).appendTo(goalList);
+  $(`<li>${nutrition.goal.carbohydrates} carbohydrates</li>`).appendTo(goalList);
   $(`<li>${nutrition.goal.fat} fat</li>`).appendTo(goalList);
   $(`<li>${nutrition.goal.protein} protein</li>`).appendTo(goalList);
 }
@@ -82,7 +82,7 @@ function updateLeftoversSection() {
 
   // Append the updated leftovers information to the list
   $(`<li>${nutrition.leftover.calories} calories</li>`).appendTo(leftoverList);
-  $(`<li>${nutrition.leftover.carbs} carbs</li>`).appendTo(leftoverList);
+  $(`<li>${nutrition.leftover.carbohydrates} carbohydrates</li>`).appendTo(leftoverList);
   $(`<li>${nutrition.leftover.fat} fat</li>`).appendTo(leftoverList);
   $(`<li>${nutrition.leftover.protein} protein</li>`).appendTo(leftoverList);
 }
@@ -125,7 +125,7 @@ function updateCards() {
         <p class="card-text">Carbs: ${value.carbs}</p>
         <p class="card-text">Fat: ${value.fat}</p>
         <p class="card-text">Protein: ${value.protein}</p>
-        <a href="#" class="btn btn-primary">Check Recipe!</a>
+        <a href="mealView.html" class="btn btn-primary">Check Recipe!</a>
       </div>
     </div>
   `;
@@ -150,7 +150,7 @@ function updateCards() {
 }
 
 // function to save queries to local storage
-function saveQuery(query, data, msg) {
+function saveQuery(query, data) {
   let queries = JSON.parse(localStorage.getItem("queries")) || {};
 
   // Check if query already exists in local storage
@@ -163,7 +163,7 @@ function saveQuery(query, data, msg) {
 
   // Check if there are enough leftover calories
   if (!hasLeftoverCalories(queries, data.calories.value)) {
-    modalMessage.text("You don't have enough calories left! :(");
+    modalMessage.text(`You don't have enough calories left! :( ${query} has ${data.calories.value} calories.`);
     modalContent.css("background-color", "#EF9595");
     modal.css("display", "block");
     return false;
@@ -185,7 +185,7 @@ function saveQuery(query, data, msg) {
     leftover -= value.calories;
   }
   nutrition.leftover.calories = leftover;
-  localStorage.setItem("goal", JSON.stringify(nutrition));
+  localStorage.setItem("nutrition", JSON.stringify(nutrition));
 
   return true;
 }
@@ -207,3 +207,9 @@ window.onclick = function (event) {
     modal.css("display", "none");
   }
 }
+
+// Save card's header content in the local storage as selectedMeal
+$(".card").on("click", function () {
+  const selectedMeal = $(this).find("h5").text();
+  localStorage.setItem("selectedMeal", selectedMeal);
+});
