@@ -4,8 +4,13 @@ const searchBtn = $("#search-btn");
 const mealList = $("#meal-list");
 const goalList = $("#goal-list");
 const leftoverList = $("#leftover-list");
-const nutrition = nutritionInfo()
-
+const nutrition = nutritionInfo();
+// Get the <span> element that closes the modal
+const span = $(".close")[0];
+// Get the modal
+const modal = $("#alert-modal");
+const modalMessage = $(".modal-message");
+const modalContent = $(".modal-content");
 // Load page content
 loadContent()
 
@@ -23,18 +28,17 @@ $("form").on("submit", function (event) {
   })
     .then(response => response.json())
     .then(data => {
-
       saveQuery(query, data);
       updateCards();
       updateLeftoversSection();
-    }
-    );
+      searchInput.val("");
+    });
 });
 
 // function to load page content
 function loadContent() {
   // Update the goal section
-  localStorage.setItem("goal", JSON.stringify(nutrition));
+  localStorage.setItem("nutrition", JSON.stringify(nutrition));
   // Update the goal section, the leftovers section, and the cards
   updateGoalSection(nutrition)
   updateLeftoversSection(nutrition)
@@ -44,16 +48,17 @@ function loadContent() {
 // function to save nutrition info to local storage
 function nutritionInfo() {
   // Parse nutrition info from local storage or create empty object
-  let nutrition = JSON.parse(localStorage.getItem("goal"));
+  let nutrition = JSON.parse(localStorage.getItem("nutrition"));
+  let quizGoal = JSON.parse(localStorage.getItem("quizGoal"));
 
   if (!nutrition) {
     nutrition = {
-      goal: { calories: 2000, carbs: 200, fat: 50, protein: 100 },
-      leftover: { calories: 2000, carbs: 10, fat: 30, protein: 60 }
+      goal: { calories: quizGoal.calories, carbohydrates: quizGoal.carbohydrates, fat: quizGoal.fat, protein: quizGoal.protein },
+      leftover: { calories: quizGoal.calories, carbohydrates: quizGoal.carbohydrates, fat: quizGoal.fat, protein: quizGoal.protein }
     };
 
     // Save nutrition info to local storage
-    localStorage.setItem("goal", JSON.stringify(nutrition));
+    localStorage.setItem("nutrition", JSON.stringify(nutrition));
   }
 
   return nutrition;
@@ -65,7 +70,7 @@ function updateGoalSection() {
   goalList.empty();
 
   $(`<li>${nutrition.goal.calories} calories</li>`).appendTo(goalList);
-  $(`<li>${nutrition.goal.carbs} carbs</li>`).appendTo(goalList);
+  $(`<li>${nutrition.goal.carbohydrates} carbohydrates</li>`).appendTo(goalList);
   $(`<li>${nutrition.goal.fat} fat</li>`).appendTo(goalList);
   $(`<li>${nutrition.goal.protein} protein</li>`).appendTo(goalList);
 }
@@ -77,38 +82,9 @@ function updateLeftoversSection() {
 
   // Append the updated leftovers information to the list
   $(`<li>${nutrition.leftover.calories} calories</li>`).appendTo(leftoverList);
-  $(`<li>${nutrition.leftover.carbs} carbs</li>`).appendTo(leftoverList);
+  $(`<li>${nutrition.leftover.carbohydrates} carbohydrates</li>`).appendTo(leftoverList);
   $(`<li>${nutrition.leftover.fat} fat</li>`).appendTo(leftoverList);
   $(`<li>${nutrition.leftover.protein} protein</li>`).appendTo(leftoverList);
-}
-
-// function to save queries to local storage
-function saveQuery(query, data) {
-  // parse queries from local storage or create empty object
-  let queries = JSON.parse(localStorage.getItem("queries")) || {};
-
-  // check if query already exists in local storage
-  if (queries.hasOwnProperty(query)) {
-    alert(`${query} has already been added to the meal list!`);
-    return false;
-  }
-
-  // check if there are leftover calories
-  if (!hasLeftoverCalories(queries, data.calories.value)) {
-    alert(`You don't have enough calories for ${query}`);
-    return false;
-  }
-
-  // add query to queries object
-  queries[query] = {
-    calories: data.calories.value,
-    carbs: data.carbs.value,
-    fat: data.fat.value,
-    protein: data.protein.value
-  };
-
-  // save queries to local storage
-  localStorage.setItem("queries", JSON.stringify(queries));
 }
 
 // function to check if there are leftover calories
@@ -149,7 +125,7 @@ function updateCards() {
         <p class="card-text">Carbs: ${value.carbs}</p>
         <p class="card-text">Fat: ${value.fat}</p>
         <p class="card-text">Protein: ${value.protein}</p>
-        <a href="#" class="btn btn-primary">Check Recipe!</a>
+        <a href="mealView.html" class="btn btn-primary" onclick="saveSelectedMeal('${key}')">Check Recipe!</a>
       </div>
     </div>
   `;
@@ -173,18 +149,27 @@ function updateCards() {
   }
 }
 
+function saveSelectedMeal(title) {
+  localStorage.setItem("selectedMeal", title);
+}
+
 // function to save queries to local storage
 function saveQuery(query, data) {
   let queries = JSON.parse(localStorage.getItem("queries")) || {};
 
   // Check if query already exists in local storage
   if (queries.hasOwnProperty(query)) {
-    alert(`${query} has already been added to the meal list!`);
+    modalMessage.text(`You already have added ${query} to your list!`);
+    modalContent.css("background-color", "#EFB495");
+    modal.css("display", "block");
     return false;
   }
-// check if there are leftover calories
+
+  // Check if there are enough leftover calories
   if (!hasLeftoverCalories(queries, data.calories.value)) {
-    alert(`You don't have enough calories for ${query}`);
+    modalMessage.text(`You don't have enough calories left! :( ${query} has ${data.calories.value} calories.`);
+    modalContent.css("background-color", "#EF9595");
+    modal.css("display", "block");
     return false;
   }
 
@@ -204,8 +189,19 @@ function saveQuery(query, data) {
     leftover -= value.calories;
   }
   nutrition.leftover.calories = leftover;
-  localStorage.setItem("goal", JSON.stringify(nutrition));
+  localStorage.setItem("nutrition", JSON.stringify(nutrition));
 
   return true;
 }
 
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.css("display", "none");
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.css("display", "none");
+  }
+}

@@ -17,7 +17,6 @@ hideAll();
 showQuestionAndButton('.nutritionQuestion, .nutritionButton');
 
 // Question One
-
 $('.nutritionButton button').on('click', function () {
 
   var quizGoal = {
@@ -59,7 +58,7 @@ $('.nutritionButton button').on('click', function () {
 
   localStorage.setItem('quizGoal', JSON.stringify(quizGoal));
   showQuestionAndButton('.mealQuestion, .mealButton');
-    
+
 });
 
 
@@ -99,5 +98,5 @@ $('.allergiesButton button').on('click', function () {
       localStorage.setItem('foodAllergies', foodAllergies);
       window.location.href = 'search.html';
     }
-    
+
 });
