@@ -13,11 +13,14 @@ function getRandomMeal(){
         })
         .then(function(data){
             var imgEl = $("<img>");
-            imgEl.attr('class', 'randomMealImage')
-            var mealName = $('<h4> '+ data.meals[0].strMeal+' </h4>');
-            var pEl1 = $('<p> '+ data.meals[0].strCategory+", " + data.meals[0].strArea +'</p>');
+            imgEl.attr('class', 'randomMealImage');
+            var mealName = $('<h5> ' + data.meals[0].strMeal + ' </h5>');
+            var pEl1 = $('<p> ' + data.meals[0].strCategory + ", " + data.meals[0].strArea + '</p>');
             imgEl.attr('src', data.meals[0].strMealThumb);
             rnMeal.append(mealName, pEl1, imgEl);
+            var ingredientsTitle = $('<h5 class="ingredients-title">Ingredients:</h5>');
+            rnMeal.append(ingredientsTitle);
+            ingredientsTitle.css('margin-top', '10px');
             
             //API returns upto 20 Ingredients and measurements
 
@@ -40,11 +43,12 @@ function getRandomMeal(){
                 var iconEl = $('<img src="assets/images/youtube.svg" alt="Icon" class="icon">');
                 buttonEl.append(iconEl);
                 buttonEl.append(" Youtube");
+                buttonEl.css('margin-right', '10px')
                 $('#randomMeal').append(buttonEl);
               }
 
             if (data.meals[0].strSource){
-                var aElSrc = $('<a href="'+data.meals[0].strSource+'">' );
+                var aElSrc = $('<a href="'+data.meals[0].strSource + '" class="btn btn-primary" target="_blank">');
                 aElSrc.text("Recipe");
                 rnMeal.append(aElSrc);
             }
