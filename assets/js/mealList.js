@@ -125,7 +125,7 @@ function updateCards() {
         <p class="card-text">Carbs: ${value.carbs}</p>
         <p class="card-text">Fat: ${value.fat}</p>
         <p class="card-text">Protein: ${value.protein}</p>
-        <a href="mealView.html" class="btn btn-primary">Check Recipe!</a>
+        <a href="mealView.html" class="btn btn-primary" onclick="saveSelectedMeal('${key}')">Check Recipe!</a>
       </div>
     </div>
   `;
@@ -147,6 +147,10 @@ function updateCards() {
   if (cardCount > 0) {
     mealList.append(cardRow);
   }
+}
+
+function saveSelectedMeal(title) {
+  localStorage.setItem("selectedMeal", title);
 }
 
 // function to save queries to local storage
@@ -202,14 +206,3 @@ window.onclick = function (event) {
   }
 }
 
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.css("display", "none");
-  }
-}
-
-// Save card's header content in the local storage as selectedMeal
-$(".card").on("click", function () {
-  const selectedMeal = $(this).find("h5").text();
-  localStorage.setItem("selectedMeal", selectedMeal);
-});
