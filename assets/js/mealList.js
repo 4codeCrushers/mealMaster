@@ -207,3 +207,9 @@ window.onclick = function (event) {
     modal.css("display", "none");
   }
 }
+
+// Save card's header content in the local storage as selectedMeal
+$(".card").on("click", function () {
+  const selectedMeal = $(this).find("h5").text();
+  localStorage.setItem("selectedMeal", selectedMeal);
+});
