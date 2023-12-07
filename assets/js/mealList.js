@@ -53,8 +53,8 @@ function nutritionInfo() {
 
   if (!nutrition) {
     nutrition = {
-      goal: { calories: 2000, carbs: 200, fat: 50, protein: 100 },
-      leftover: { calories: 2000, carbs: 10, fat: 30, protein: 60 }
+      goal: { calories: 2000, carbohydrates: 200, fat: 50, protein: 100 },
+      leftover: { calories: 2000, carbohydrates: 10, fat: 30, protein: 60 }
     };
 
     // Save nutrition info to local storage
@@ -70,7 +70,7 @@ function updateGoalSection() {
   goalList.empty();
 
   $(`<li>${nutrition.goal.calories} calories</li>`).appendTo(goalList);
-  $(`<li>${nutrition.goal.carbs} carbs</li>`).appendTo(goalList);
+  $(`<li>${nutrition.goal.carbohydrates} carbohydrates</li>`).appendTo(goalList);
   $(`<li>${nutrition.goal.fat} fat</li>`).appendTo(goalList);
   $(`<li>${nutrition.goal.protein} protein</li>`).appendTo(goalList);
 }
@@ -82,7 +82,7 @@ function updateLeftoversSection() {
 
   // Append the updated leftovers information to the list
   $(`<li>${nutrition.leftover.calories} calories</li>`).appendTo(leftoverList);
-  $(`<li>${nutrition.leftover.carbs} carbs</li>`).appendTo(leftoverList);
+  $(`<li>${nutrition.leftover.carbohydrates} carbohydrates</li>`).appendTo(leftoverList);
   $(`<li>${nutrition.leftover.fat} fat</li>`).appendTo(leftoverList);
   $(`<li>${nutrition.leftover.protein} protein</li>`).appendTo(leftoverList);
 }
