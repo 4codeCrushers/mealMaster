@@ -1,23 +1,20 @@
 // hiding all questions
-
-function hideAll () {
+function hideAll() {
     $('.nutritionQuestion, .mealQuestion, .allergiesQuestion, .nutritionButton, .mealButton, .allergiesButton').hide();
 }
 
 // function to show Qs when ready
-function showQuestionAndButton (questionClass, buttonClass) {
-    hideAll ();
+function showQuestionAndButton(questionClass, buttonClass) {
+    hideAll();
     $(questionClass).show();
     $(buttonClass).show();
 }
 
 // Code to only show Q1 when quiz page loads
-
 hideAll();
 showQuestionAndButton('.nutritionQuestion, .nutritionButton');
 
 // Question One
-
 $('.nutritionButton button').on('click', function () {
 
     var quizGoal = {
@@ -35,7 +32,6 @@ $('.nutritionButton button').on('click', function () {
 
 
 // Question Two
-
 $('.mealButton button').on('click', function () {
 
     var numberOfMeals = $('#mealsInput').val();
@@ -46,12 +42,10 @@ $('.mealButton button').on('click', function () {
 });
 
 // Question Three
-
 $('.allergiesButton button').on('click', function () {
 
     var foodAllergies = $('#allergiesInput').val();
     localStorage.setItem('foodAllergies', foodAllergies);
-        
-    window.location.href = '#';
-    
+
+    window.location.href = 'meal-list.html';
 });
