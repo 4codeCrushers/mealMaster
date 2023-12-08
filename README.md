@@ -18,7 +18,7 @@ Information is stored in the user's browser storage, allowing them to easily mon
 ## Technologies 
 
  - HTML/CSS
- - Bootsrtap
+ - Bootstrap
  - JavaScript
  - JQuery
  - DayJS
