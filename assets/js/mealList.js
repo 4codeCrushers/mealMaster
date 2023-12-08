@@ -11,6 +11,7 @@ const span = $(".close")[0];
 const modal = $("#alert-modal");
 const modalMessage = $(".modal-message");
 const modalContent = $(".modal-content");
+
 // Load page content
 loadContent()
 
@@ -43,6 +44,12 @@ function loadContent() {
   updateGoalSection(nutrition)
   updateLeftoversSection(nutrition)
   updateCards()
+  const queries = JSON.parse(localStorage.getItem("queries"));
+  const selectedDay = localStorage.getItem("selectedDay");
+  const queryKeys = Object.keys(queries || []);
+
+  const selectedDayMealList = { selectedDay: selectedDay, mealList: queryKeys };
+  localStorage.setItem("selectedDayMealList", JSON.stringify(selectedDayMealList));
 }
 
 // function to save nutrition info to local storage
