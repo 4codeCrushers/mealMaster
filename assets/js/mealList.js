@@ -44,9 +44,37 @@ function loadContent() {
   updateGoalSection(nutrition)
   updateLeftoversSection(nutrition)
   updateCards()
+  updateSelectedDayMealList()
+}
+
+// Event listener for search button
+$("form").on("submit", function (event) {
+  event.preventDefault();
+
+  const query = searchInput.val();
+  const url = `https://api.spoonacular.com/recipes/guessNutrition?title=${query}&apiKey=${apiKey}`;
+
+  fetch(url, {
+    headers: {
+      "X-Api-Key": apiKey
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      saveQuery(query, data);
+      updateCards();
+      updateLeftoversSection();
+      searchInput.val("");
+
+      // Update selectedDayMealList
+      updateSelectedDayMealList()
+    });
+});
+
+function updateSelectedDayMealList() {
   const queries = JSON.parse(localStorage.getItem("queries"));
   const selectedDay = localStorage.getItem("selectedDay");
-  const queryKeys = Object.keys(queries || []);
+  const queryKeys = Object.keys(queries || {});
 
   const selectedDayMealList = { selectedDay: selectedDay, mealList: queryKeys };
   localStorage.setItem("selectedDayMealList", JSON.stringify(selectedDayMealList));
