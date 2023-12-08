@@ -86,7 +86,7 @@ $('.allergiesButton button').on('click', function () {
   var foodAllergies = $('#allergiesInput').val();
   var feedbackAllergies = $('.allergiesQuestion .invalid-feedback');
 
-  // Only allow text in input box 
+  // Only allow text in input box
 
   var lettersOnlyRegex = /^[a-zA-Z\s]+$/;
 
@@ -96,7 +96,7 @@ $('.allergiesButton button').on('click', function () {
     } else {
       feedbackAllergies.hide();
       localStorage.setItem('foodAllergies', foodAllergies);
-      window.location.href = 'search.html';
+    window.location.href = 'meal-list.html';
     }
 
 });
