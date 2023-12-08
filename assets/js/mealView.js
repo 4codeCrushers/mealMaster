@@ -58,6 +58,13 @@ function displayMeal (data){
       rnMeal.append(aElSrc);
   }
 
+  var backButton = $('<button class="btn btn-primary" style="margin-left: 10px">Back</button>');
+  rnMeal.append(backButton);
+
+  backButton.on('click', function() {
+  window.location.href = 'meal-list.html';
+});
+
 
   for (let index = 0; index < recipe.length; index++) {
     if (recipe[index].Ingredient === "") {
