@@ -15,6 +15,16 @@ The user can then search for ingredients and recipes to prepare for the days and
 
 Information is stored in the user's browser storage, allowing them to easily monitor progress on return to the application.
 
+## Technologies 
+
+ - HTML/CSS
+ - Bootsrtap
+ - JavaScript
+ - JQuery
+ - DayJS
+ - <a href="https://spoonacular.com/food-api">Spoonacular API</a>
+ - <a href="https://www.themealdb.com/api.php">themealdb API</a>
+
 ## Screenshot
 
 tba
