@@ -22,4 +22,17 @@ $(document).ready(function () {
     });
     calendarContainer.append(newCard);
   }
+
+  const selectedDay = JSON.parse(localStorage.getItem('selectedDayMealList') || '[]');
+
+  const cardTitles = $(".card-title").toArray().map(function (element) {
+    return $(element).text();
+  });
+
+  for (var i = 0; i < cardTitles.length; i++) {
+    if (cardTitles[i] === selectedDay.selectedDay) {
+      $(".card-text").eq(i).text(selectedDay.mealList);
+    }
+  }
 });
+
